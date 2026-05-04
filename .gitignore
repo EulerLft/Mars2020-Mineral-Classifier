@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files 
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments 
+.venv/
+env/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints 
+.ipynb_checkpoints/
+
+# Data Folders: keep the structure, ignore the heavy files 
+# We ignore the contents of raw and processed but exclude .gitkeep 
+data/raw/**
+!data/raw/**/.gitkeep
+
+data/processed/**
+!data/processed/**/
+!data/processed/**/.gitkeep
+
+# Ignore all large data files globally just in case they are outside the folders 
+*.csv
+*.json
+*.msa
+*.png
+*.jpg
+*.jpeg
+
+# Database: Uploading this as requested 
+# !PIXL_pipeline_regsitry.db 
+
+# OS generated files 
+.DS_store
+Thumbs.db
