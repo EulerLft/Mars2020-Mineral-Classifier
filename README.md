@@ -1,6 +1,7 @@
 # PIXL Data Processing Pipeline
 
 ### Automated Geochemical Analysis for NASA Mars 2020 Mission Data
+### [🚀 View Live Dashboard](https://mars2020-mineral-classifier-apwekg58ujsjzmdutvh7zf.streamlit.app/)
 This repository provides an automated, database-driven pipeline for processing and normalizing NASA PIXL (Planetary Instrument for X-ray Lithochemistry) data. The system transforms raw Localized Full Spectra (RFS) and Elemental Abundance (RQA) files into research-ready geochemical datasets, enabling high-resolution mineralogical classification of the Martian surface. 
 
 ## Core Engineering Highlights 
