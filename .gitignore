@@ -23,11 +23,8 @@ data/processed/**
 
 # Ignore all large data files globally just in case they are outside the folders 
 *.csv
-*.json
 *.msa
 *.png
-*.jpg
-*.jpeg
 
 # Database: Uploading this as requested 
 # !PIXL_pipeline_regsitry.db 
