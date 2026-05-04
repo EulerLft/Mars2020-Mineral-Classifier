@@ -21,8 +21,11 @@ data/processed/**
 !data/processed/**/
 !data/processed/**/.gitkeep
 
+!data/analysis/
+!data/analysis/*.json
+!data/analysis/*.map
+
 # Ignore all large data files globally just in case they are outside the folders 
-*.csv
 *.msa
 *.png
 
