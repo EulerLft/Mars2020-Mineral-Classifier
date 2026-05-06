@@ -1,42 +1,58 @@
 # PIXL Data Processing Pipeline
-
-### Automated Geochemical Analysis for NASA Mars 2020 Mission Data
 ### [🚀 View Live Dashboard](https://mars2020-mineral-classifier-apwekg58ujsjzmdutvh7zf.streamlit.app/)
+
+**Engineering a Scalable Data Pipeline: Processing 36,000+ NASA Mars Perseverance Scans with 1:1 Scientific Parity.**
+
 This repository provides an automated, database-driven pipeline for processing and normalizing NASA PIXL (Planetary Instrument for X-ray Lithochemistry) data. The system transforms raw Localized Full Spectra (RFS) and Elemental Abundance (RQA) files into research-ready geochemical datasets, enabling high-resolution mineralogical classification of the Martian surface. 
 
-## Core Engineering Highlights 
-- <b>State Management</b>: Utilizes a SQLite registry to track thousands of files across disparate sols, ensuring 99.9% data integrity and preventing redundant processing. 
-- <b>Performance Optimization</b>: Automates the processing of 36,000+ high-dimensional scans, eliminating 600+ hours of manual data handling. 
-- <b>Scientific Parity</b>: Developed the "MIP_SF" stoichiometric classification algorithm, achieving 1:1 correlation with NASA's MIST algorithm for primary igneous mineral detection. 
+## Core Porject Impact & Engineering Highlights 
+* **Performance Optimization**: Automated the processing of **36,000+ high-dimensional scans**, eliminating **600+ hours** of manual data handling.
+* **State Management**: Implemented a **SQLite-driven state machine** to track thousands of files across disparate Martian sols, ensuring ** 99.9% data integrity** and **preventing redundant processing**.  
+* **Scientific Parity**: Developed the "MIP_SF" stoichiometric classification algorithm, achieving **1:1 correlation** with NASA's internal MIST algorithm for primary igneous mineral detection. 
 
-## Pipeline Architecture
+---
+
+## 🛠️ Technical Stack
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Streamlit](https://img.shields.io/badge/streamlit-%23FF4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)
+
+---
+
+## 📊 Pipeline Architecture
+The pipeline follows a modular five-stage architecture governed by a central database registry:
+```mermaid
+graph TD
+    A[NASA PDS Raw Data] --> B[Inventory Manager]
+    B -->|Register SCLK| C[(SQLite State Registry)]
+    C --> D[Extraction & Normalization]
+    D --> E[Molar Transformation]
+    E --> F[Master Builder & Synthesis]
+    F --> G[Mineral Classifier]
+    G --> H[Interactive Streamlit Dashboard]
+
+---
+
+## Modular Component Breakdown
 The pipeline follows a modular five-stage architecture governed by a central database registry: 
-1. Inventory & Discovery (`inventory_manager.py`): Scans raw data directories to identify unique Spacecreaft Clock (SCLK) identifiers and registers them into the SQLite database.
-2. Extraction & Parsing (`parsers.py`): Isolate spatial coordinates (x, y, z), engineering telemetry (detector livetimes, temperature, etc.) and raw spectra, normalizing counts per second (cps) for each individual measurement (PMC).
-3. Chemical Transformation (`molar_transform.py`): Maps elemental weight percentages from abundance files (`rqa/rqb/rqc`) to molar abundances and calculates fundamental geological ratios (e.g., Fe/Mn, Mafic Index, etc.)
-4. Master Synthesis (`master_builder.py`): Merges coordinates, timing, and chemistry into a "Geochem Mater" dataset for final mineral identification. 
-5. Mineral Classification (`mineral_classifier.py`): Uses the synthesized datasets to classify mineralogy "shot-by-shot" and generates mapping.csv and JSON files for spatial visualization.
+1. <b>Inventory & Discovery</b> (`inventory_manager.py`): Scans raw data directories to identify unique Spacecreaft Clock (SCLK) identifiers and registers them into the SQLite database.
+2. <b>Extraction & Parsing</b> (`parsers.py`): Isolate spatial coordinates, engineering telemetry (detector livetimes, temperature, etc.) and normalizing raw specta counts per second (CPS).
+3. <b>Chemical Transformation</b> (`molar_transform.py`): Maps elemental weight percentages to molar abundances and calculates key geological ratios (e.g., Fe/Mn, Mafic Index, etc.)
+4. <b>Master Synthesis</b> (`master_builder.py`): Merges coordinates, telemetry, and chemistry into a unified "Geochem Mater" dataset. 
+5. <b>Mineral Classification</b> (`mineral_classifier.py`): Uses the synthesized datasets to classify "shot-by-shot" mineralogy and generates spatial mapping assets.
 
-## Technical Environment
-- <b>Languages & State</b>: Python 3.x, SQLite3.
-- <b>Data Science Stack</b>: Pandas, NumPy (Vectorized operations for high-speed geochemical calculations), Streamlit.
-- <>File I/O</b>: Robust relative pathing utilizing `os` and `glob` to manage nested NASA PDS directory structures. 
+---
 
-files from the [PDS Geosciences website](https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_pixl/).
-
-## Directory Structure
-To maintain relative pathing, local environments must be organized as follows: 
+## 📂 Directory Structure
+To maintain relative pathing and cross-platform compatability, the environment is organized as follows: 
 
 ```
 Mars2020-Mineral-Classifier/
 ├── PIXL_pipeline_registry.db   # Central SQLite state management
-├── README.md                   # Technical documentation
-├── LICENSE                     # MIT License for open-source use
-├── requirements.txt            # List of required Python dependencies
-├── .gitignore                  # Prevents temporary/local data from staging
-├── refs/ 
-    └── molar_table.csv         # Reference: molar masses and n-ratios
-├── src/                        # Core logic and engineering
+├── refs/ 			# Reference molar masses and n-ratios
+├── src/                        # Core engineering logic
     └── inventory_manager.py    # Directory scanning and database updates
     └── mapping_tools.py        # 2D spatial visualization and labeling
     └── master_builder.py       # Table merging and geochemical rule application
@@ -45,28 +61,29 @@ Mars2020-Mineral-Classifier/
     └──	navigation_app.py	# Interactive mission context app
     └── parsers.py              # NASA 'rfs' files extraction and normalization
     └──seed_mineral_rules.py    # Mineralogy classification rulesets
-    └── assets                  # Visual assets for navigation and mapping
+    └── assets/                 # Visual assets for navigation and mapping
 ├── data/
-    └── raw/                    # Place original .csv files from PDS/PIQUANT output here
+    └── raw/                    # Original NASA PDS/PIQUANT .csv files
         └── spectra/            # NASA raw 'rfs' files (.csv)
         └── abundances/         # NASA processed 'rqa/rqb/rqc' files (.csv)
-    └── processed/              # All split, transformed, and generated files (e.g., molar, geochem, etc.)
+    └── processed/              # All split, transformed, and generated files
     └── analysis/               # JSON and mapping.csv files used to generate maps
+└── requirements.txt            # Environment dependencies
 ```
 
-## Database Registry & Data Flow
-The `PIXL_pipeline_registry.db` acts as the single source of truth for the entire project, utilizing three primary tables:
-- `file_inventory`: Tracks every file associated with the project, including technical identifiers (SCLK) and file paths.
-- `processing_status`: A high-level dashboard used by the scripts to determine the next task (e.g., molar_ready, is_processed).
-- `sample_registry`: Maps technical SCLK identifiers to human-readable mission context, such as the nominal Martian Sol and target rock name.
+---
 
-2. Getting Started
-- Dependencies: Ensure you have pandas installed: `pip install pandas`.
-- Usage: Run the script from the terminal or your IDE: `python src/parsers.py`
-    - What it does: Identifies all `*rfs*.csv` files in the data/raw folder.
-    - Splits the complex NASA RFS format into individual tables (SCLK, PMC, DetA, DetB).
-    - Normalizes Detector A and B spectra into Counts Per Second (CPS) by dividing raw counts by the instrument's live time.
+## 🔄 Data Flow & Registry Logic
+The pipeline utlizes a "Pull" logic governed by `PIXL_pipeline_registry.db`. This acts as the single source of truth, tracking every SCLK ID through for primary tables: `file_inventory`, `processing_status`, `sample_registry`, `mineral_rules`.
 
+#### Processign Pattern:
+- <b>Query</b>: Each script asks the database for files where prerequisite flags are met but its own stage is incomplete.
+- <b>Process</b>: Excecutes vectorized operations (Pandas/NumPy) for high-speed calculations. 
+- <b>Register</b>: Updates the registry with new file paths and flips the status flag to `1`. 
+
+This architecture ensures that if a script crashes or a file is missing, the pipeline simply skips that entry and continues, rather than failing the entire batch.
+
+---
 
 ## Technical Environment 
 The pipeline is designed to be cross-platform, using standard Python libraries to marge complex file structures and data transformations. 
@@ -75,29 +92,20 @@ The pipeline is designed to be cross-platform, using standard Python libraries t
 - Data Manipulation (`pandas`, `numpy`): Geochemical calculations, normalizations and molar mass conversions are handled using vectorized operations for speed and precision. 
 - State Management (`sqlite3`): A local database acts a single source of truth, tracking every Spacecraft Clock (SCLK) ID and its current processing stage
 
-    
-## Data Flow & Processing Logic
-The pipeline operates on a "Pull" logic governed by these database tables. Each script follows a specific pattern:
-
-1. Query: Ask the database for SCLKs where the prerequisite flag is 1 but its own flag is 0.
-2. Process: Perform the necessary file I/O or calculation (using os and glob to locate the files).
-3. Register: Write the new output file path into file_inventory.
-4. Update: Flip its specific status flag in processing_status to 1.
-
-This architecture ensures that if a script crashes or a file is missing, the pipeline simply skips that entry and continues, rather than failing the entire batch.
-
-
+---
 
 ## PIXL Data Glossary
 The NASA Planetary Data System (PDS) uses specific three-letter suffixes to distinguish between raw telemetry, processed chemistry, and bulk averages. This project uses the Spacecraft Clock (SCLK)—the 10-digit code in the filename—to link these disparate files together.
 
+files from the [PDS Geosciences website](https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_pixl/).
 
-| Suffix | Name | Description | Purpose in this Pipeline |
-| :--- | :--- | :--- | :--- |
-| **.rfs** | Raw Formatted Spectrum | Raw X-ray counts and instrument telemetry. | **Source of Spatial Data:** Used by `parsers.py` to extract PMC coordinates (x, y, z) and the master SCLK. |
-| **.rqa** | Reduced Quantitative Analysis (Det A) | Processed weight percentages (wt%) for Detector A. | **Source of Chemistry:** Used for high-resolution mineral mapping. |
-| **.rqb** | Reduced Quantitative Analysis (Det B) | Processed weight percentages (wt%) for Detector B. | **Source of Chemistry:** Alternative detector for validation. |
-| **.rqc** | Combined Analysis (A+B) | Mathematically combined chemistry from both detectors. | **Primary Data Source:** The standard file for final mineral maps. |
+
+| Suffix | Name | Purpose in this Pipeline |
+| :--- | :--- | :--- |
+| **.rfs** | Raw Formatted Spectrum | Source of Spatial and PMC coordinates (x, y, z). |
+| **.rqa/b** | Reduced Quantitative Analysis (Det A/DetB) | Processed weight percentages (wt%) used for high-resolution mineral mappings. |
+| **.rqc** | Combined Analysis (A+B) | Primary Data Source for final mineral maps. |
 
 ## Research & Academic Context
-This pipeline was developed to characterize the elemental and mineralogical composition of the Jezero Crater using PIXL XRF scans. By bridging complex radiation theory with automated data engineering, it facilitates the transition from static raw telemetry to dynamic, interactive research environments.[Read Full Thesis](https://atrium.lib.uoguelph.ca/server/api/core/bitstreams/8dd984d7-c84b-4457-b635-f81fc8d1d5f9/content).
+This pipeline was developed to characterize the elemental and mineralogical composition of the Jezero Crater using PIXL XRF scans. By bridging complex radiation theory with automated data engineering, it facilitates the transition from static raw telemetry to dynamic, interactive research environments.
+[Read Full MSc Thesis](https://atrium.lib.uoguelph.ca/server/api/core/bitstreams/8dd984d7-c84b-4457-b635-f81fc8d1d5f9/content).
