@@ -30,7 +30,9 @@ graph TD
     C --> D[Extraction & Normalization]
     D --> E[Molar Transformation]
     E --> F[Master Builder & Mineral Classifier]
-    F --> G[Interactive Streamlit Dashboard]
+    F --> G([Interactive Streamlit Dashboard])
+
+    style G fill:#f96,stroke:#333,stroke-width:2px
 ```
 ---
 
