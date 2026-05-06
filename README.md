@@ -32,7 +32,7 @@ graph TD
     E --> F[Master Builder & Mineral Classifier]
     F --> G([Interactive Streamlit Dashboard])
 
-    style G fill:#f96,stroke:#333,stroke-width:2px
+    style G fill:#cc5500,stroke:#333,stroke-width:2px,color:#fff
 ```
 ---
 
