@@ -3,11 +3,11 @@
 
 **Engineering a Scalable Data Pipeline: Processing 36,000+ NASA Mars Perseverance Scans with 1:1 Scientific Parity.**
 
-This repository provides an automated, database-driven pipeline for processing and normalizing NASA PIXL (Planetary Instrument for X-ray Lithochemistry) data. The system transforms raw Localized Full Spectra (RFS) and Elemental Abundance (RQA) files into research-ready geochemical datasets, enabling high-resolution mineralogical classification of the Martian surface. 
+---
 
 ## Core Porject Impact & Engineering Highlights 
-* **Performance Optimization**: Automated the processing of **36,000+ high-dimensional scans**, eliminating **600+ hours** of manual data handling.
-* **State Management**: Implemented a **SQLite-driven state machine** to track thousands of files across disparate Martian sols, ensuring ** 99.9% data integrity** and **preventing redundant processing**.  
+* **Performance Optimization**: Automated processing of **36,000+ high-dimensional scans**.
+* **State Management**: Implemented a **SQLite-driven state machine** to track thousands of files across disparate Martian sols, ensuring **99.9% data integrity** and **preventing redundant processing**.  
 * **Scientific Parity**: Developed the "MIP_SF" stoichiometric classification algorithm, achieving **1:1 correlation** with NASA's internal MIST algorithm for primary igneous mineral detection. 
 
 ---
@@ -32,7 +32,7 @@ graph TD
     E --> F[Master Builder & Synthesis]
     F --> G[Mineral Classifier]
     G --> H[Interactive Streamlit Dashboard]
-
+```
 ---
 
 ## Modular Component Breakdown
