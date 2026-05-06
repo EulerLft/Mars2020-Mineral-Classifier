@@ -29,9 +29,8 @@ graph TD
     B -->|Register SCLK| C[(SQLite State Registry)]
     C --> D[Extraction & Normalization]
     D --> E[Molar Transformation]
-    E --> F[Master Builder & Synthesis]
-    F --> G[Mineral Classifier]
-    G --> H[Interactive Streamlit Dashboard]
+    E --> F[Master Builder & Mineral Classifier]
+    F --> G[Interactive Streamlit Dashboard]
 ```
 ---
 
@@ -94,7 +93,7 @@ The pipeline is designed to be cross-platform, using standard Python libraries t
 
 ---
 
-## PIXL Data Glossary
+## 📖 PIXL Data Glossary
 The NASA Planetary Data System (PDS) uses specific three-letter suffixes to distinguish between raw telemetry, processed chemistry, and bulk averages. This project uses the Spacecraft Clock (SCLK)—the 10-digit code in the filename—to link these disparate files together.
 
 files from the [PDS Geosciences website](https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_pixl/).
@@ -106,6 +105,6 @@ files from the [PDS Geosciences website](https://pds-geosciences.wustl.edu/m2020
 | **.rqa/b** | Reduced Quantitative Analysis (Det A/DetB) | Processed weight percentages (wt%) used for high-resolution mineral mappings. |
 | **.rqc** | Combined Analysis (A+B) | Primary Data Source for final mineral maps. |
 
-## Research & Academic Context
+## 🎓 Research & Academic Context
 This pipeline was developed to characterize the elemental and mineralogical composition of the Jezero Crater using PIXL XRF scans. By bridging complex radiation theory with automated data engineering, it facilitates the transition from static raw telemetry to dynamic, interactive research environments.
 [Read Full MSc Thesis](https://atrium.lib.uoguelph.ca/server/api/core/bitstreams/8dd984d7-c84b-4457-b635-f81fc8d1d5f9/content).
