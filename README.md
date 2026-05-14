@@ -5,7 +5,7 @@
 **Engineering a Scalable Data Pipeline: Processing 40,000+ NASA Mars Perseverance Scans with 1:1 Scientific Parity.**
 
 <p align="center">
-  <img src="assets/app_demo.gif" width="800">
+  <img src="docs-assets/main_dashboard.JPG" width="800">
 </p>
 
 ---
