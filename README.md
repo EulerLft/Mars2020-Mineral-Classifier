@@ -1,5 +1,5 @@
 # PIXL Data Processing Pipeline
-### [🚀 View Live Dashboard](https://mars2020-mineral-classifier.streamlit.app/)
+## [🔗 Click Here to Launch the Interactive Research Dashboard](https://mars2020-mineral-classifier.streamlit.app/)
 *(Note: If the app is "asleep," simply click **"Wake up"** — it will be ready in about 30 seconds.)*
 
 **Engineering a Scalable Data Pipeline: Processing 40,000+ NASA Mars Perseverance Scans with 1:1 Scientific Parity.**
@@ -30,8 +30,8 @@
 The project deploys a full-stack research environment that enables interaction with rover telemetry in real-time. By transitioning NASA’s static PDS files into a dynamic Streamlit interface, the platform provides immediate spatial context for chemical data.
 
 ### 1. Mission Context & Campaign Selection
-The dashboard provides a high-level overview of the Jezero Crater, allowing users to drill down into specific mission campaigns such as the **Crater Floor** or **Delta Front**. 
-
+**Feature:** Dynamic geospatial filtering of the Jezero Crater mission.
+Users can toggle between various Perseverance mission campaigns (e.g., Crater Floor vs. Delta Front) to filter the geochemical registry. This provides the necessary geological context before deep-diving into individual target scans.
 <p align="center">
   <img src="docs-assets/main_dashboard.JPG" width="800" alt="Mission Overview Map">
 </p>
@@ -42,13 +42,15 @@ The dashboard provides a high-level overview of the Jezero Crater, allowing user
 
 
 ### 2. Interactive Target Selection
-Users can select specific geological targets (e.g., "Dourbes" or "Quartier") and specific scans by Sol. The interface dynamically pulls compositional metrics, such as Bulk Fe/Mn ratios and primary mineral abundances, from each scan's JSON files.
+**Feature:** Relational data retrieval via SQLite state management.
+The interface allows for the selection of specific geological targets (e.g., "Dourbes" or "Quartier") by Sol and Spacecraft Clock (SCLK). The dashboard dynamically pulls compositional metrics and primary mineral abundances directly from the processed SQL registry.
 <p align="center">
   <img src="docs-assets/dourbes_overview.JPG" width="800" alt="Interactive Target Selection">
 </p>
 
 ### 3. High-Resolution Geochemical Mapping
-The core impact of the **MIP_SF algorithm** is visualized through 2D spatial maps. These generate shot-by-shot mineralogical classifications, achieving parity with NASA's internal MIST algorithm.
+**Feature:** 2D spatial visualization of the MIP_SF stoichiometric algorithm.
+The core impact of the pipeline is visualized through these high-resolution maps. These generate shot-by-shot mineralogical classifications, achieving 1:1 parity with NASA's internal MIST algorithm for igneous primary minerals.
 <p align="center">
   <img src="docs-assets/dourbes_sample.JPG" width="800" alt="Geochemical Mineral Map">
 </p>
