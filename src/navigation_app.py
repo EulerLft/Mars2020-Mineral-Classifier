@@ -250,7 +250,7 @@ elif st.session_state.view == 'crater':
                 st.session_state.view = 'maaz'
                 st.rerun()
         img_path_crater = os.path.join(ASSETS_DIR, "nav_02_crater_floor_campaign.JPG")
-        st.image(img_path_crater, use_container_width=True)
+        st.image(img_path_crater, width=950)
         
     with col_info:
         st.write("## Crater Floor Campaign Overview")
@@ -302,7 +302,7 @@ elif st.session_state.view == 'seitah':
         st.write("### Séítah Formation")
         # Show map image for context 
         img_path_seitah = os.path.join(ASSETS_DIR, "nav_02a_seitah_zoom.JPG")
-        st.image(img_path_seitah, width=900)
+        st.image(img_path_seitah, use_container_width=True)
 
 # --- Maaz Formation ---- 
 elif st.session_state.view == 'maaz':
