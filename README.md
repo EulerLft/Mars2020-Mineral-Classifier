@@ -10,7 +10,7 @@
 
 ---
 
-## Core Porject Impact & Engineering Highlights 
+## Core Project Impact & Engineering Highlights 
 * **Performance Optimization**: Automated processing of **40,000+ high-dimensional geochemical scans**.
 * **State Management**: Implemented a **SQLite-driven state machine** to track thousands of scans across disparate Martian sols, ensuring **99.9% data integrity** and **preventing redundant processing**.  
 * **Scientific Parity**: Developed the "MIP_SF" stoichiometric classification algorithm, achieving **1:1 correlation** with NASA's internal MIST algorithm for primary igneous mineral detection. 
