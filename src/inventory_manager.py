@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Edited on Tues Apr 28 13:00:34 2026
-
+Edited on Tues Apr 28 13:00:34
 @author: salva
 """
 

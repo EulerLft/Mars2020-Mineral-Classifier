@@ -73,8 +73,8 @@ graph TD
 
 ## Modular Component Breakdown
 The five-stage architecture is governed by a central database registry: 
-1. <b>Inventory & Discovery</b> (`inventory_manager.py`): Scans raw data directories to identify unique Spacecreaft Clock (SCLK) identifiers and registers them into the SQLite database.
-2. <b>Extraction & Parsing</b> (`parsers.py`): Isolate spatial coordinates, engineering telemetry (detector livetimes, temperature, etc.) and normalizing raw specta counts per second (CPS).
+1. <b>Inventory & Discovery</b> (`inventory_manager.py`): Scans raw data directories to identify unique Spacecraft Clock (SCLK) identifiers and registers them into the SQLite database.
+2. <b>Extraction & Parsing</b> (`parsers.py`): Isolate spatial coordinates, engineering telemetry (detector livetimes, temperature, etc.) and normalizing raw spectra counts per second (CPS).
 3. <b>Chemical Transformation</b> (`molar_transform.py`): Maps elemental weight percentages to molar abundances and calculates key geological ratios (e.g., Fe/Mn, Mafic Index, etc.)
 4. <b>Master Synthesis</b> (`master_builder.py`): Merges coordinates, telemetry, and chemistry into a unified "Geochem Mater" dataset. 
 5. <b>Mineral Classification</b> (`mineral_classifier.py`): Uses the synthesized datasets to classify "shot-by-shot" mineralogy and generates spatial mapping assets.
@@ -115,9 +115,9 @@ Mars2020-Mineral-Classifier/
 ---
 
 ## 🔄 Data Flow & Registry Logic
-The pipeline utlizes a "Pull" logic governed by `PIXL_pipeline_registry.db`. This acts as the single source of truth, tracking every SCLK ID through for primary tables: `file_inventory`, `processing_status`, `sample_registry`, `mineral_rules`.
+The pipeline utilizes a "Pull" logic governed by `PIXL_pipeline_registry.db`. This acts as the single source of truth, tracking every SCLK ID through for primary tables: `file_inventory`, `processing_status`, `sample_registry`, `mineral_rules`.
 
-#### Processign Pattern:
+#### Processing Pattern:
 - <b>Query</b>: Each script asks the database for files where prerequisite flags are met but its own stage is incomplete.
 - <b>Process</b>: Excecutes vectorized operations (Pandas/NumPy) for high-speed calculations. 
 - <b>Register</b>: Updates the registry with new file paths and flips the status flag to `1`. 
